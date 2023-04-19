@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="index.css" />
+  <script type="text/javascript" src="https://d3js.org/d3.v7.min.js"></script>
+  <script type="module" src="chloroplethMap.js"></script>
+  <script type="module" src="chloroplethMap2.js"></script>
+  <script type="module" src="lineChartDynamic.js"></script>
+  <script type="module" src="lineChartUpdate.js"></script>
+  <script type="module" src="lineChartDynamic2.js"></script>
+  <script type="module" src="lineChartUpdate2.js"></script>
+  <script type="module" src="barChart.js"></script>
+  <script type="module" src="updateBarChart.js"></script>
+  <script type="module" src="bubbleMap.js"></script>
+
+  <title>F20DV dashboard</title>
+</head>
+<body>
+  <div id="sidebar">
+    <h1>F20DV Data Visualisation</h1>
+    <div id="button-container">
+      <button id="co2-btn" class="gas">Carbon Dioxide</button>
+      <button id="methane-btn" class="gas">Methane</button>
+      <button id="nitrous-oxide-btn" class="gas">Nitrous Oxide</button>
+      <button id="total-greenhouse-gas-btn" class="gas">
+        Total Greenhouse Gas
+      </button>
+      <button id="primary-energy-consumption-btn" class="energy">
+        Energy Consumption
+      </button>
+      <button id="energy-consumption-per-capita-btn" class="energy">
+        Energy Consumption per Capita
+      </button>
+      <button id="renewables-consumption-btn" class="energy">
+        Renewables Consumption
+      </button>
+      <button id="renewables-energy-per-capita-btn" class="energy">
+        Renewables Consumption per Capita
+      </button>
+      <button id="renewables-share-energy-btn" class="energy">
+        Renewable Energy Share
+      </button>
+    </div>
+  </div>
+
+  <div id="charts-container">
+    <h1 id="charts-header">Greenhouse gas emmisions and Energy consumption</h1>
+    <div id="chloro-maps-container">
+      <div id="chloro-map-container">
+        <h5>
+          Negative: Choropleth map representing CO2 emmisions by colour scale
+          thresholds
+        </h5>
+      </div>
+      <div id="chloro-map-container2">
+        <h5>
+          Positive: Same map representing data using different colour and
+          threshold(Ex. India)
+        </h5>
+      </div>
+    </div>
+
+    <div id="line-charts-container">
+      <div id="line-chart-dynamic-container">
+        <h5 class="chart-header">Greenhouse Gas Emmisions Data</h5>
+      </div>
+      <div id="line-chart-dynamic-container2">
+        <h5 class="chart-header">Energy Consumption Data</h5>
+      </div>
+    </div>
+    <div id="scatter-plots-container">
+      <div id="scatter-plot-container">
+        <h5>
+          Negative: Scatter Plot representing renewable Energy share and
+          consumption
+        </h5>
+      </div>
+      <div id="scatter-plot-container2">
+        <h5>Positive: Same Scatter Plot representing the plots in Log scale</h5>
+      </div>
+    </div>
+    <div id="bar-charts-container">
+      <div id="bar-chart-container">
+        <h5 class="chart-header">Greenhouse Gas Emmisions Data</h5>
+      </div>
+      <div id="bar-chart-container2">
+        <h5 class="chart-header">Energy Consumption Data</h5>
+      </div>
+    </div>
+    <div id="bubble-map-container">
+      <h5 class="chart-header">
+        Bubble Chart over world map representing share of global CO2 emmisions
+      </h5>
+    </div>
+  </div>
+
+  <script type="module">
+    import chloroplethMap from "./chloroplethMap.js";
+    import chloroplethMap2 from "./chloroplethMap2.js";
+    import lineChartDynamic from "./lineChartDynamic.js";
+    import updateLineChart from "./lineChartUpdate.js";
+    import lineChartDynamic2 from "./lineChartDynamic2.js";
+    import updateLineChart2 from "./lineChartUpdate2.js";
+    import scatterPlot from "./scatterPlot.js";
+    import scatterPlot2 from "./scatterPlot2.js";
+    import barChart from "./barChart.js";
+    import updateBarChart from "./updateBarChart.js";
+    import barChart2 from "./barChart2.js";
+    import updateBarChart2 from "./updateBarChart2.js";
+    import bubbleMap from "./bubbleMap.js";
+
+    // Initialize line chart
+    updateLineChart("IND", "co2");
+    // Initialize chloropleth map
+    chloroplethMap();
+    // Initialize chloropleth map
+    chloroplethMap2();
+    // Initialize line chart
+    updateLineChart2("IND", "primary_energy_consumption");
+    //Initialize Scatter Plot
+    scatterPlot();
+    //Initialize Scatter Plot
+    scatterPlot2();
+    // Initialize bar chart
+    updateBarChart("co2");
+    // Initialize bar chart
+    updateBarChart2("primary_energy_consumption");
+    // Initialize bubble map
+    bubbleMap();
+
+    // Buttons
+    document.getElementById("co2-btn").addEventListener("click", () => {
+      handleButtonClick("co2-btn");
+      updateBarChart("co2");
+      updateLineChart(undefined, "co2");
+    });
+
+    document.getElementById("methane-btn").addEventListener("click", () => {
+      handleButtonClick("methane-btn");
+      updateBarChart("methane");
+      updateLineChart(undefined, "methane");
+    });
+
+    document
+      .getElementById("nitrous-oxide-btn")
+      .addEventListener("click", () => {
+        handleButtonClick("nitrous-oxide-btn");
+        updateBarChart("nitrous_oxide");
+        updateLineChart(undefined, "nitrous_oxide");
+      });
+
+    document
+      .getElementById("total-greenhouse-gas-btn")
+      .addEventListener("click", () => {
+        handleButtonClick("total-greenhouse-gas-btn");
+        updateBarChart("total_ghg");
+        updateLineChart(undefined, "total_ghg");
+      });
+
+    document
+      .getElementById("primary-energy-consumption-btn")
+      .addEventListener("click", () => {
+        handleButtonClick("primary-energy-consumption-btn");
+        updateBarChart2("primary_energy_consumption");
+        updateLineChart2(undefined, "primary_energy_consumption");
+      });
+
+    document
+      .getElementById("energy-consumption-per-capita-btn")
+      .addEventListener("click", () => {
+        handleButtonClick("energy-consumption-per-capita-btn");
+        updateBarChart2("energy_per_capita");
+        updateLineChart2(undefined, "energy_per_capita");
+      });
+
+    document
+      .getElementById("renewables-consumption-btn")
+      .addEventListener("click", () => {
+        handleButtonClick("renewables-consumption-btn");
+        updateBarChart2("renewables_consumption");
+        updateLineChart2(undefined, "renewables_consumption");
+      });
+
+    document
+      .getElementById("renewables-energy-per-capita-btn")
+      .addEventListener("click", () => {
+        handleButtonClick("renewables-energy-per-capita-btn");
+        updateBarChart2("renewables_energy_per_capita");
+        updateLineChart2(undefined, "renewables_energy_per_capita");
+      });
+
+    document
+      .getElementById("renewables-share-energy-btn")
+      .addEventListener("click", () => {
+        handleButtonClick("renewables-share-energy-btn");
+        updateBarChart2("renewables_share_energy");
+        updateLineChart2(undefined, "renewables_share_energy");
+      });
+
+    function handleButtonClick(buttonId) {
+      // Get all buttons in the button container
+      const buttons = document.querySelectorAll("#button-container button");
+
+      // Remove the 'selected' class from all buttons
+      buttons.forEach((button) => button.classList.remove("selected"));
+
+      // Add the 'selected' class to the clicked button
+      document.getElementById(buttonId).classList.add("selected");
+    }
+
+    // ...
+  </script>
+</body>

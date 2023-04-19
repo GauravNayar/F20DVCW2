@@ -1,0 +1,185 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  min-height: 100vh;
+  background-color: #242424;
+  color: steelblue;
+}
+
+#charts-container text {
+  fill: steelblue;
+}
+.scat-label-box,
+.bub-label-box {
+  stroke: steelblue;
+}
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  background-color: #333333;
+  /* background-color: #f0f0f0; */
+  height: 100%;
+  position: fixed;
+  width: 208px;
+}
+#charts-header {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0.5%;
+}
+.chart-header {
+  text-align: center;
+}
+#charts-container {
+  margin-left: 220px;
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#line-chart-dynamic-container {
+  width: 60%;
+  height: 45vh;
+  margin-bottom: 2%;
+}
+#line-chart-dynamic-container2 {
+  width: 60%;
+  height: 45vh;
+  margin-bottom: 4%;
+}
+
+#chloro-map-container2 {
+  margin-bottom: 2%;
+}
+
+#bar-chart-container {
+  width: 60%;
+  height: 45vh;
+  margin-bottom: 6%;
+}
+#bar-chart-container2 {
+  width: 60%;
+  height: 45vh;
+  margin-bottom: 6%;
+}
+/* #scatter-plot-container {
+  width: 34%;
+  height: 50vh;
+} */
+
+#button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+button {
+  background-color: #4caf50; /* Button background color */
+  border: none; /* Remove default borders */
+  color: white; /* Text color */
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px; /* Text size */
+  padding: 10px 20px; /* Padding inside the button */
+  margin: 5px 2px; /* Margin outside the button */
+  cursor: pointer; /* Change cursor to a hand when hovering */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth background-color transition */
+}
+
+button:hover {
+  background-color: #45a049; /* Background color when hovering */
+}
+
+button.selected {
+  background-color: #0a590e;
+}
+
+.gas,
+.energy {
+  background-color: #4caf50; /* Button background color */
+  /* ... other common styles */
+}
+
+/* Add this style block to define the specific style for .gas buttons */
+.energy {
+  background-color: #4caf50; /* Green background color for gas buttons */
+}
+
+.energy:hover {
+  background-color: #45a049; /* Green background color when hovering for gas buttons */
+}
+
+.energy.selected {
+  background-color: #0a590e; /* Darker green background color for selected gas buttons */
+}
+
+/* Add this style block to define the specific style for .energy buttons */
+.gas {
+  background-color: #1e88e5; /* Blue background color for energy buttons */
+}
+
+.gas:hover {
+  background-color: #1976d2; /* Blue background color when hovering for energy buttons */
+}
+
+.gas.selected {
+  background-color: #0d47a1; /* Darker blue background color for selected energy buttons */
+}
+/* #bubble-map {
+  background-color: rgb(48, 44, 44);
+  background-color: black;
+} */
+
+/* svg {
+  border: 1px solid black;
+} */
+.Country {
+  cursor: pointer;
+}
+.bubble:hover {
+  stroke: black;
+  stroke-width: 4px;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 999;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.selected {
+  opacity: 1 !important;
+  stroke: black;
+  stroke-width: 2px;
+}
+
+.scat-label {
+  fill: black;
+}
+.scatYlabel,
+.scatXlabel,
+.barYlabel,
+.lineYlabel {
+  fill: black;
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
+}
+
+.tick text {
+  fill: black;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+}
